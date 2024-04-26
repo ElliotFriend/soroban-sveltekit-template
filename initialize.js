@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 // so we don't need to specify duplicate variables in .env
 for (const key in process.env) {
   if (key.startsWith('VITE_')) {
-    process.env[key.substring(7)] = process.env[key];
+    process.env[key.substring(5)] = process.env[key];
   }
 }
 
@@ -93,7 +93,7 @@ function importContract(contract) {
     `  ...Client.networks.${process.env.SOROBAN_NETWORK},\n` +
     `  rpcUrl,\n` +
     `${process.env.SOROBAN_NETWORK === 'local' || 'standalone' ? `  allowHttp: true,\n` : null}` +
-    `  publicKey: ${GENESIS_ACCOUNTS[process.env.SOROBAN_NETWORK]},\n` +
+    `  publicKey: '${GENESIS_ACCOUNTS[process.env.SOROBAN_NETWORK]}',\n` +
     `});\n`;
 
   const outputPath = `${outputDir}/${filenameNoExt}.ts`;
